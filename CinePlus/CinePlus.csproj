@@ -18,7 +18,6 @@
     <ItemGroup>
       <Folder Include="API\" />
       <Folder Include="APP\" />
-      <Folder Include="Domain\Services\" />
       <Folder Include="IoC\" />
     </ItemGroup>
 
