@@ -10,6 +10,8 @@
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.7"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.14" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
@@ -17,8 +19,6 @@
       <Folder Include="API\" />
       <Folder Include="APP\" />
       <Folder Include="Domain\Services\" />
-      <Folder Include="Infra\Configs\" />
-      <Folder Include="Infra\Repos\" />
       <Folder Include="IoC\" />
     </ItemGroup>
 
