@@ -5,5 +5,4 @@ namespace CinePlus.Domain.ViewModels.SessionSeats;
 public class CreateSessionSeatVm
 {
     public required string Seat { get; set; }
-    public long SessionId { get; set; }
 }
