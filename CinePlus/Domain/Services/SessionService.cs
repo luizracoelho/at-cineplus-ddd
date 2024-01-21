@@ -32,4 +32,7 @@ public class SessionService : BaseService<Session>
 
         return await _repo.UpdateAsync(sessionDb);
     }
+
+    public async Task<IList<Session>> ListByMovieAndRoomAsync(long movieId, long roomId) 
+        => await _repo.ListByMovieAndRoomAsync(movieId, roomId);
 }

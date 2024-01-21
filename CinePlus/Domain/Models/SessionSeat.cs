@@ -6,12 +6,12 @@ public class SessionSeat
 {
     #region Properties
 
-    public long Id { get; set; }
-    public string Seat { get; set; }
-    public SessionSeatStatus Status { get; set; }
-    public long SessionId { get; set; }
-    public Session? Session { get; set; }
-    public string? Document { get; set; }
+    public long Id { get; private set; }
+    public string Seat { get; private set; }
+    public SessionSeatStatus Status { get; private set; }
+    public long SessionId { get; private set; }
+    public Session? Session { get; private set; }
+    public string? Document { get; private set; }
 
     #endregion
     

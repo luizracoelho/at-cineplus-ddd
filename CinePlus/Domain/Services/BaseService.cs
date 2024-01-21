@@ -16,15 +16,15 @@ public abstract class BaseService<T> where T : class
     {
         if (id <= 0) throw new Exception("Não encontrado.");
         
-        var movieDb = await _repo.FindAsync(id);
-        if (movieDb == null) throw new Exception("Não encontrado.");
+        var entity = await _repo.FindAsync(id);
+        if (entity == null) throw new Exception("Não encontrado.");
 
-        return movieDb;
+        return entity;
     }
     
     public virtual async Task<bool> RemoveAsync(long id)
     {
-        var movieDb = await FindAsync(id);
-        return await _repo.RemoveAsync(movieDb);
+        var entity = await FindAsync(id);
+        return await _repo.RemoveAsync(entity);
     }
 }
