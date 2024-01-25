@@ -15,6 +15,5 @@ public class MapProfile : Profile
         CreateMap<Room, RoomVm>().ReverseMap();
         CreateMap<Session, SessionVm>().ReverseMap();     
         CreateMap<SessionSeat, SessionSeatVm>().ReverseMap();
-
     }
 }

@@ -1,4 +1,4 @@
-using CinePlus.APP;
+using CinePlus.Domain.Contracts.APP;
 using CinePlus.Domain.ViewModels.Rooms;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,13 +9,17 @@ namespace CinePlus.API.Controllers;
 [Produces("application/json")]
 public class RoomsController : ControllerBase
 {
-    private readonly RoomApp _app;
+    private readonly IRoomApp _app;
 
-    public RoomsController(RoomApp app) => _app = app;
+    public RoomsController(IRoomApp app) => _app = app;
 
     [HttpGet]
     public async Task<IActionResult> ListAsync()
         => Ok(await _app.ListAsync());
+
+    [HttpGet("actives")]
+    public async Task<IActionResult> ListActivesAsync()
+        => Ok(await _app.ListActivesAsync());
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> FindAsync(long id)

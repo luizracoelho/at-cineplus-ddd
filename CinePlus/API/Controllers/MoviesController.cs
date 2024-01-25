@@ -1,4 +1,4 @@
-using CinePlus.APP;
+using CinePlus.Domain.Contracts.APP;
 using CinePlus.Domain.ViewModels.Movies;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,14 +9,21 @@ namespace CinePlus.API.Controllers;
 [Produces("application/json")]
 public class MoviesController : ControllerBase
 {
-    private readonly MovieApp _app;
+    private readonly IMovieApp _app;
 
-    public MoviesController(MovieApp app) => _app = app;
+    public MoviesController(IMovieApp app) => _app = app;
 
     [HttpGet]
     public async Task<IActionResult> ListAsync()
     {
         var movies = await _app.ListAsync();
+        return Ok(movies);
+    }
+
+    [HttpGet("actives")]
+    public async Task<IActionResult> ListActivesAsync()
+    {
+        var movies = await _app.ListActivesAsync();
         return Ok(movies);
     }
 

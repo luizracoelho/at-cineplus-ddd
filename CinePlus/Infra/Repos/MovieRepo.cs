@@ -1,12 +1,14 @@
+using CinePlus.Domain.Contracts.Context;
+using CinePlus.Domain.Contracts.Repos;
 using CinePlus.Domain.Models;
 using CinePlus.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Infra.Repos;
 
-public class MovieRepo : BaseRepo<Movie>
+public class MovieRepo : BaseRepo<Movie>, IMovieRepo
 {
-    public MovieRepo(DataContext context) : base(context)
+    public MovieRepo(IDataContext context) : base(context)
     {
     }
 

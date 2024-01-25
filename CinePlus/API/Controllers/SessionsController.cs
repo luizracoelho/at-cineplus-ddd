@@ -1,4 +1,4 @@
-using CinePlus.APP;
+using CinePlus.Domain.Contracts.APP;
 using CinePlus.Domain.ViewModels.Sessions;
 using CinePlus.Domain.ViewModels.SessionSeats;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +10,9 @@ namespace CinePlus.API.Controllers;
 [Produces("application/json")]
 public class SessionsController : ControllerBase
 {
-    private readonly SessionApp _app;
+    private readonly ISessionApp _app;
 
-    public SessionsController(SessionApp app) => _app = app;
+    public SessionsController(ISessionApp app) => _app = app;
 
     [HttpGet]
     public async Task<IActionResult> ListAsync()
@@ -48,23 +48,23 @@ public class SessionsController : ControllerBase
     [HttpPut("{sessionId:long}/seats/{id:long}")]
     public async Task<IActionResult> UpdateSeatAsync(long sessionId, long id, [FromBody] CreateSessionSeatVm vm)
         => Ok(await _app.UpdateSeatAsync(sessionId, id, vm));
-    
+
     [HttpDelete("{sessionId:long}/seats/{id:long}")]
     public async Task<IActionResult> RemoveSeatAsync(long sessionId, long id)
         => Ok(await _app.RemoveSeatAsync(sessionId, id));
-    
+
     [HttpPatch("{sessionId:long}/seats/{id:long}/reserve")]
     public async Task<IActionResult> ReserveSeatAsync(long sessionId, long id, [FromBody] ReserveSessionSeatVm vm)
         => Ok(await _app.ReserveSeatAsync(sessionId, id, vm));
-    
+
     [HttpPatch("{sessionId:long}/seats/{id:long}/cancel-reserve")]
     public async Task<IActionResult> CancelReserveSeatAsync(long sessionId, long id)
         => Ok(await _app.CancelReserveSeatAsync(sessionId, id));
-    
+
     [HttpPatch("{sessionId:long}/seats/{id:long}/confirm-reserve")]
     public async Task<IActionResult> ConfirmReserveSeatAsync(long sessionId, long id)
         => Ok(await _app.ConfirmReserveSeatAsync(sessionId, id));
-    
+
     [HttpPatch("{sessionId:long}/seats/{id:long}/cancel-confirmation")]
     public async Task<IActionResult> CancelConfirmationSeatAsync(long sessionId, long id)
         => Ok(await _app.CancelConfirmationSeatAsync(sessionId, id));

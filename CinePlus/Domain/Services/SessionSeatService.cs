@@ -1,3 +1,5 @@
+using CinePlus.Domain.Contracts.Repos;
+using CinePlus.Domain.Contracts.Services;
 using CinePlus.Domain.Models;
 using CinePlus.Domain.Validators;
 using CinePlus.Infra.Repos;
@@ -5,12 +7,12 @@ using FluentValidation;
 
 namespace CinePlus.Domain.Services;
 
-public class SessionSeatService : BaseService<SessionSeat>
+public class SessionSeatService : BaseService<SessionSeat>, ISessionSeatService
 {
-    private readonly SessionSeatRepo _repo;
+    private readonly ISessionSeatRepo _repo;
     private readonly SessionSeatValidator _validator;
 
-    public SessionSeatService(SessionSeatRepo repo, SessionSeatValidator validator) : base(repo)
+    public SessionSeatService(ISessionSeatRepo repo, SessionSeatValidator validator) : base(repo)
     {
         _repo = repo;
         _validator = validator;

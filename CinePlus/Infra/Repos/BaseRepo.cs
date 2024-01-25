@@ -1,14 +1,16 @@
+using CinePlus.Domain.Contracts.Context;
+using CinePlus.Domain.Contracts.Repos;
 using CinePlus.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Infra.Repos;
 
-public abstract class BaseRepo<T> where T : class
+public abstract class BaseRepo<T> : IBaseRepo<T> where T : class
 {
-    private readonly DataContext _context;
+    private readonly IDataContext _context;
     protected readonly DbSet<T> DbSet;
 
-    protected BaseRepo(DataContext context)
+    protected BaseRepo(IDataContext context)
     {
         _context = context;
         DbSet = context.Set<T>();

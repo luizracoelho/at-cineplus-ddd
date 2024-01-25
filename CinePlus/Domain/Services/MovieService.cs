@@ -1,16 +1,17 @@
+using CinePlus.Domain.Contracts.Repos;
+using CinePlus.Domain.Contracts.Services;
 using CinePlus.Domain.Models;
 using CinePlus.Domain.Validators;
-using CinePlus.Infra.Repos;
 using FluentValidation;
 
 namespace CinePlus.Domain.Services;
 
-public class MovieService : BaseService<Movie>
+public class MovieService : BaseService<Movie>, IMovieService
 {
-    private readonly MovieRepo _repo;
+    private readonly IMovieRepo _repo;
     private readonly MovieValidator _validator;
 
-    public MovieService(MovieRepo repo, MovieValidator validator) : base(repo)
+    public MovieService(IMovieRepo repo, MovieValidator validator) : base(repo)
     {
         _repo = repo;
         _validator = validator;

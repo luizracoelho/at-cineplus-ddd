@@ -1,16 +1,17 @@
 using AutoMapper;
+using CinePlus.Domain.Contracts.APP;
+using CinePlus.Domain.Contracts.Services;
 using CinePlus.Domain.Models;
-using CinePlus.Domain.Services;
 using CinePlus.Domain.ViewModels.Rooms;
 
 namespace CinePlus.APP;
 
-public class RoomApp
+public class RoomApp : IRoomApp
 {
-    private readonly RoomService _service;
+    private readonly IRoomService _service;
     private readonly IMapper _mapper;
 
-    public RoomApp(RoomService service, IMapper mapper)
+    public RoomApp(IRoomService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
@@ -19,6 +20,12 @@ public class RoomApp
     public async Task<IList<RoomVm>> ListAsync()
     {
         var rooms = await _service.ListAsync();
+        return _mapper.Map<IList<RoomVm>>(rooms);
+    }
+
+    public async Task<IList<RoomVm>> ListActivesAsync()
+    {
+        var rooms = await _service.ListActivesAsync();
         return _mapper.Map<IList<RoomVm>>(rooms);
     }
 

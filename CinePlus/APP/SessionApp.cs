@@ -1,20 +1,21 @@
 using AutoMapper;
+using CinePlus.Domain.Contracts.APP;
+using CinePlus.Domain.Contracts.Services;
 using CinePlus.Domain.Models;
-using CinePlus.Domain.Services;
 using CinePlus.Domain.ViewModels.Sessions;
 using CinePlus.Domain.ViewModels.SessionSeats;
 
 namespace CinePlus.APP;
 
-public class SessionApp
+public class SessionApp : ISessionApp
 {
-    private readonly SessionService _service;
-    private readonly SessionSeatService _seatService;
+    private readonly ISessionService _service;
+    private readonly ISessionSeatService _seatService;
     private readonly IMapper _mapper;
 
     public SessionApp(
-        SessionService service,
-        SessionSeatService seatService,
+        ISessionService service,
+        ISessionSeatService seatService,
         IMapper mapper
     )
     {

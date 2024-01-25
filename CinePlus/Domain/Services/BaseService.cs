@@ -1,13 +1,15 @@
+using CinePlus.Domain.Contracts.Repos;
+using CinePlus.Domain.Contracts.Services;
 using CinePlus.Infra.Repos;
 using FluentValidation;
 
 namespace CinePlus.Domain.Services;
 
-public abstract class BaseService<T> where T : class
+public abstract class BaseService<T> : IBaseService<T> where T : class
 {
-    private readonly BaseRepo<T> _repo;
+    private readonly IBaseRepo<T> _repo;
 
-    protected BaseService(BaseRepo<T> repo) => _repo = repo;
+    protected BaseService(IBaseRepo<T> repo) => _repo = repo;
 
     public virtual async Task<IList<T>> ListAsync()
         => await _repo.ListAsync();

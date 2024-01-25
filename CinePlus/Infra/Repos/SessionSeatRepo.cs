@@ -1,12 +1,14 @@
+using CinePlus.Domain.Contracts.Context;
+using CinePlus.Domain.Contracts.Repos;
 using CinePlus.Domain.Models;
 using CinePlus.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Infra.Repos;
 
-public class SessionSeatRepo : BaseRepo<SessionSeat>
+public class SessionSeatRepo : BaseRepo<SessionSeat>, ISessionSeatRepo
 {
-    public SessionSeatRepo(DataContext context) : base(context)
+    public SessionSeatRepo(IDataContext context) : base(context)
     {
     }
 

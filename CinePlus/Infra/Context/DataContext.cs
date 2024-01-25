@@ -1,9 +1,10 @@
+using CinePlus.Domain.Contracts.Context;
 using CinePlus.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Infra.Context;
 
-public class DataContext : DbContext
+public class DataContext : DbContext, IDataContext
 {
     public DataContext(DbContextOptions options) : base(options)
     {

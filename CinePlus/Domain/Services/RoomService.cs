@@ -1,21 +1,25 @@
+using CinePlus.Domain.Contracts.Repos;
+using CinePlus.Domain.Contracts.Services;
 using CinePlus.Domain.Models;
 using CinePlus.Domain.Validators;
-using CinePlus.Infra.Repos;
 using FluentValidation;
 
 namespace CinePlus.Domain.Services;
 
-public class RoomService : BaseService<Room>
+public class RoomService : BaseService<Room>, IRoomService
 {
-    private readonly RoomRepo _repo;
+    private readonly IRoomRepo _repo;
     private readonly RoomValidator _validator;
     
-    public RoomService(RoomRepo repo, RoomValidator validator) : base(repo)
+    public RoomService(IRoomRepo repo, RoomValidator validator) : base(repo)
     {
         _repo = repo;
         _validator = validator;
     }
-    
+
+    public async Task<IList<Room>> ListActivesAsync() 
+        => await _repo.ListActivesAsync();
+
     public async Task<Room> AddAsync(Room room)
     {
         await _validator.ValidateAndThrowAsync(room);

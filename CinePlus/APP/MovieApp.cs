@@ -1,16 +1,18 @@
 using AutoMapper;
+using CinePlus.Domain.Contracts.APP;
+using CinePlus.Domain.Contracts.Services;
 using CinePlus.Domain.Models;
 using CinePlus.Domain.Services;
 using CinePlus.Domain.ViewModels.Movies;
 
 namespace CinePlus.APP;
 
-public class MovieApp
+public class MovieApp : IMovieApp
 {
-    private readonly MovieService _service;
+    private readonly IMovieService _service;
     private readonly IMapper _mapper;
 
-    public MovieApp(MovieService service, IMapper mapper)
+    public MovieApp(IMovieService service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;
@@ -21,6 +23,12 @@ public class MovieApp
         var movies = await _service.ListAsync();
         var moviesVm = _mapper.Map<IList<MovieVm>>(movies);
         return moviesVm;
+    }
+
+    public async Task<IList<MovieVm>> ListActivesAsync()
+    {
+        var movies = await _service.ListActivesAsync();
+        return _mapper.Map<IList<MovieVm>>(movies);
     }
 
     public async Task<MovieVm> FindAsync(long id)

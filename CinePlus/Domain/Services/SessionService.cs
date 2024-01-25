@@ -1,16 +1,17 @@
+using CinePlus.Domain.Contracts.Repos;
+using CinePlus.Domain.Contracts.Services;
 using CinePlus.Domain.Models;
 using CinePlus.Domain.Validators;
-using CinePlus.Infra.Repos;
 using FluentValidation;
 
 namespace CinePlus.Domain.Services;
 
-public class SessionService : BaseService<Session>
+public class SessionService : BaseService<Session>, ISessionService
 {
-    private readonly SessionRepo _repo;
+    private readonly ISessionRepo _repo;
     private readonly SessionValidator _validator;
     
-    public SessionService(SessionRepo repo, SessionValidator validator) : base(repo)
+    public SessionService(ISessionRepo repo, SessionValidator validator) : base(repo)
     {
         _repo = repo;
         _validator = validator;

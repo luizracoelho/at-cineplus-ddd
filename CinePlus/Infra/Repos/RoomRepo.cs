@@ -1,12 +1,14 @@
+using CinePlus.Domain.Contracts.Context;
+using CinePlus.Domain.Contracts.Repos;
 using CinePlus.Domain.Models;
 using CinePlus.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinePlus.Infra.Repos;
 
-public class RoomRepo : BaseRepo<Room>
+public class RoomRepo : BaseRepo<Room>, IRoomRepo
 {
-    public RoomRepo(DataContext context) : base(context)
+    public RoomRepo(IDataContext context) : base(context)
     {
     }
 
