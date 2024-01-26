@@ -1,4 +1,5 @@
 using CinePlus.Domain.Contracts.APP;
+using CinePlus.Domain.Exceptions;
 using CinePlus.Domain.ViewModels.Movies;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,61 +24,138 @@ public class MoviesController : ControllerBase
     [HttpGet("actives")]
     public async Task<IActionResult> ListActivesAsync()
     {
-        var movies = await _app.ListActivesAsync();
-        return Ok(movies);
+        try
+        {
+            var movies = await _app.ListActivesAsync();
+            return Ok(movies);
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpGet("{id:long}")]
     public async Task<IActionResult> FindAsync(long id)
     {
-        var movie = await _app.FindAsync(id);
-        return Ok(movie);
+        try
+        {
+            var movie = await _app.FindAsync(id);
+            return Ok(movie);
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPost]
     public async Task<IActionResult> AddAsync([FromBody] CreateMovieVm vm)
     {
-        var movie = await _app.AddAsync(vm);
-        return Ok(movie);
+        try
+        {
+            var movie = await _app.AddAsync(vm);
+            return Ok(movie);
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpPut("{id:long}")]
     public async Task<IActionResult> UpdateAsync(long id, [FromBody] CreateMovieVm vm)
     {
-        var movie = await _app.UpdateAsync(id, vm);
-        return Ok(movie);
+        try
+        {
+            var movie = await _app.UpdateAsync(id, vm);
+            return Ok(movie);
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpDelete("{id:long}")]
     public async Task<IActionResult> RemoveAsync(long id)
     {
-        var isSuccess = await _app.RemoveAsync(id);
+        try
+        {
+            var isSuccess = await _app.RemoveAsync(id);
 
-        if (!isSuccess)
-            return BadRequest();
+            if (!isSuccess)
+                return BadRequest();
 
-        return Ok();
+            return Ok();
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
-    
+
     [HttpPatch("{id:long}/activate")]
     public async Task<IActionResult> ActivateAsync(long id)
     {
-        var isSuccess = await _app.ActivateAsync(id);
+        try
+        {
+            var isSuccess = await _app.ActivateAsync(id);
 
-        if (!isSuccess)
-            return BadRequest();
+            if (!isSuccess)
+                return BadRequest();
 
-        return Ok();
+            return Ok();
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
-    
+
     [HttpPatch("{id:long}/deactivate")]
     public async Task<IActionResult> DeactivateAsync(long id)
     {
-        var isSuccess = await _app.DeactivateAsync(id);
+        try
+        {
+            var isSuccess = await _app.DeactivateAsync(id);
 
-        if (!isSuccess)
-            return BadRequest();
+            if (!isSuccess)
+                return BadRequest();
 
-        return Ok();
+            return Ok();
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(e.Message);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

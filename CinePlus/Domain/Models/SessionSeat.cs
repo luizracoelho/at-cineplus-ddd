@@ -65,6 +65,8 @@ public class SessionSeat
         Status = SessionSeatStatus.Available;
         return true;
     }
+
+    public void NullSession() => Session = null;
     
     public override string ToString() => $"[{Id}] Seat: {Seat} | Status: {Status}";
 

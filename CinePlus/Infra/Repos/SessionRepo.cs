@@ -19,14 +19,25 @@ public class SessionRepo : BaseRepo<Session>, ISessionRepo
                 session.MovieId == movieId &&
                 session.RoomId == roomId
             )
+            .Include(session => session.Movie)
+            .Include(session => session.Room)
             .Include(session => session.Seats)
             .ToListAsync();
     }
 
-    public override Task<Session?> FindAsync(long id)
+    public override async Task<Session?> FindAsync(long id)
     {
-        return DbSet
-            .Include(session => session.Seats)
-            .FirstOrDefaultAsync(session => session.Id == id);
+        var session = await DbSet
+                            .Include(session => session.Movie)
+                            .Include(session => session.Room)
+                            .Include(session => session.Seats)
+                            .FirstOrDefaultAsync(session => session.Id == id);
+
+        if (session == null) return session;
+        
+        foreach (var seat in session.Seats)
+            seat.NullSession();
+
+        return session;
     }
 }

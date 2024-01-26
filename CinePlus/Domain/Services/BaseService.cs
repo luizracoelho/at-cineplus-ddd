@@ -1,5 +1,6 @@
 using CinePlus.Domain.Contracts.Repos;
 using CinePlus.Domain.Contracts.Services;
+using CinePlus.Domain.Exceptions;
 using CinePlus.Infra.Repos;
 using FluentValidation;
 
@@ -16,10 +17,10 @@ public abstract class BaseService<T> : IBaseService<T> where T : class
     
     public virtual async Task<T> FindAsync(long id)
     {
-        if (id <= 0) throw new Exception("Não encontrado.");
+        if (id <= 0) throw new NotFoundException("Não encontrado.");
         
         var entity = await _repo.FindAsync(id);
-        if (entity == null) throw new Exception("Não encontrado.");
+        if (entity == null) throw new NotFoundException("Não encontrado.");
 
         return entity;
     }
